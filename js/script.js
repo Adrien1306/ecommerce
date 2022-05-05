@@ -1,12 +1,12 @@
-//Définition du container des articles filtrés par catégorie
+//On cible container où seront affichés tous les items
 const itemsContainer = document.querySelector("#items")
-
-
+//On cible les liens 
 const jeunesseButton = document.querySelector("#jeunesse")
 const bdButton = document.querySelector("#bd")
 const romanButton = document.querySelector("#roman")
 const allButton = document.querySelector("#allItems")
 
+//Affectation de l'evenement pour chaque lien
 jeunesseButton.addEventListener("click", displayCategory)
 bdButton.addEventListener("click", displayCategory)
 romanButton.addEventListener("click", displayCategory)
@@ -14,12 +14,14 @@ allButton.addEventListener("click", displayAll)
 
 
 
+// FUNCTIONS
+//Affiche les livres par catégorie
 function displayCategory() {
     itemsContainer.innerHTML = ""
     livres.forEach(element => {
         if (element.category == this.id) {
             itemsContainer.innerHTML += `
-            <article class="col-md-6">
+            <article class="col-md-6 my-2">
                 <div class="card card-body">
                     <h2>${element.name}</h2>
                     <img src="${element.image}" alt="">
@@ -35,13 +37,12 @@ function displayCategory() {
         }
     });
 }
-
 //Affiche tous les livres
 function displayAll() {
     itemsContainer.innerHTML = ""
     livres.forEach(element => {
         itemsContainer.innerHTML += `
-            <article class="col-md-6">
+            <article class="col-md-6 my-2">
                 <div class="card card-body">
                     <h2>${element.name}</h2>
                     <img src="${element.image}" alt="">
@@ -57,9 +58,3 @@ function displayAll() {
     });
 }
 
-
-
-
-function displayAllBooks() {
-
-}
