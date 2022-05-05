@@ -1,27 +1,61 @@
-//Définition du container de tous les articles
-const allItemsContainer = document.querySelector("#allItems")
-//Définition du container de chaque article
+//Définition du container des articles filtrés par catégorie
+const itemsContainer = document.querySelector("#items")
 
 
-//On affiche tous les articles de "livres" dans itemContainer
-livres.forEach(element => {
-   
-    allItemsContainer.innerHTML += `
-    <article class="col">
-        <div class="card card-body">
-            <h2>${element.name}</h2>
-            <img src="${element.image}" alt="">
-            <p> Catégorie : ${element.category}</p>
-            <p>${element.description}</p>
-            <p> ID : ${element.id}</p>
-            <p> Prix : ${element.price}</p>
-            <p> Quantité : ${element.quantity}</p>
-            <a href="#" class="btn btn-primary">Mettre dans le panier</a>
-        </div>
-       
-    </article>
-    `
-});
+const jeunesseButton = document.querySelector("#jeunesse")
+const bdButton = document.querySelector("#bd")
+const romanButton = document.querySelector("#roman")
+const allButton = document.querySelector("#allItems")
+
+jeunesseButton.addEventListener("click", displayCategory)
+bdButton.addEventListener("click", displayCategory)
+romanButton.addEventListener("click", displayCategory)
+allButton.addEventListener("click", displayAll)
+
+
+
+function displayCategory() {
+    itemsContainer.innerHTML = ""
+    livres.forEach(element => {
+        if (element.category == this.id) {
+            itemsContainer.innerHTML += `
+            <article class="col-md-6">
+                <div class="card card-body">
+                    <h2>${element.name}</h2>
+                    <img src="${element.image}" alt="">
+                    <p> Catégorie : ${element.category}</p>
+                    <p>${element.description}</p>
+                    <p> ID : ${element.id}</p>
+                    <p> Prix : ${element.price}</p>
+                    <p> Quantité : ${element.quantity}</p>
+                    <a href="#" class="btn btn-primary">Mettre dans le panier</a>
+                </div>
+            </article>
+            `
+        }
+    });
+}
+
+//Affiche tous les livres
+function displayAll() {
+    itemsContainer.innerHTML = ""
+    livres.forEach(element => {
+        itemsContainer.innerHTML += `
+            <article class="col-md-6">
+                <div class="card card-body">
+                    <h2>${element.name}</h2>
+                    <img src="${element.image}" alt="">
+                    <p> Catégorie : ${element.category}</p>
+                    <p>${element.description}</p>
+                    <p> ID : ${element.id}</p>
+                    <p> Prix : ${element.price}</p>
+                    <p> Quantité : ${element.quantity}</p>
+                    <a href="#" class="btn btn-primary">Mettre dans le panier</a>
+                </div>
+            </article>
+            `
+    });
+}
 
 
 
