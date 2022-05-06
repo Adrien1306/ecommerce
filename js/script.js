@@ -44,7 +44,7 @@ function displayInBasketContainer() {
             <tr>
                 <td>${element.name}</td>
                 <td>${1}</td>
-                <td>${element.price}</td>
+                <td>${new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(element.price)}</td>
             </tr>
         
         `
@@ -57,7 +57,7 @@ function calculTotal() {
     let total = 0
     basketItemsArray.forEach(element => {
         total += element.price
-        totalBasket.innerHTML = total
+        totalBasket.innerHTML = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(total)
     });
 }
 
@@ -75,7 +75,7 @@ function displayCategory() {
                     <p> Catégorie : ${element.category}</p>
                     <p>${element.description}</p>
                     <p> ID : ${element.id}</p>
-                    <p> Prix : ${element.price}</p>
+                    <p> Prix : ${new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(element.price)}</p>
                     <p> Quantité : ${element.quantity}</p>
                     <a id="${element.id}" href="#" class="btn btn-primary addBasketButtons">Mettre dans le panier</a>
                 </div>
@@ -98,7 +98,7 @@ function displayAll() {
                     <p> Catégorie : ${element.category}</p>
                     <p>${element.description}</p>
                     <p> ID : ${element.id}</p>
-                    <p> Prix : ${element.price}</p>
+                    <p> Prix : ${new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(element.price)}</p>
                     <p> Quantité : ${element.quantity}</p>
                     <a id="${element.id}" href="#" class="btn btn-primary addBasketButtons">Mettre dans le panier</a>
                 </div>
