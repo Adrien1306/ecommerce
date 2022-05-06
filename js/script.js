@@ -1,5 +1,13 @@
-//On cible container où seront affichés tous les items
+//On cible le container où seront affichés tous les items
 const itemsContainer = document.querySelector("#items")
+//Initialisation de la page avec tous les articles
+displayAll()
+//On cible le container où seront affichés les éléments du panier
+const basketContainer = document.querySelector("#basket")
+//On cible les balises du total du panier
+const totalBasket = document.querySelector("#totalBasket")
+//Tableau avec le contenu du panier
+let basketItemsArray = []
 //On cible les liens 
 const jeunesseButton = document.querySelector("#jeunesse")
 const bdButton = document.querySelector("#bd")
@@ -15,6 +23,45 @@ allButton.addEventListener("click", displayAll)
 
 
 // FUNCTIONS
+//Gestion du panier
+function addBasket() {
+    const addBasketButtons = document.querySelectorAll(".addBasketButtons")
+    addBasketButtons.forEach(element => {
+        element.addEventListener("click", putItemInBasketItemsArray)
+    })
+}
+
+function putItemInBasketItemsArray() {
+    basketItemsArray.push(livres[this.id])
+    console.log(basketItemsArray);
+    displayInBasketContainer()
+}
+
+function displayInBasketContainer() {
+    basketContainer.innerHTML = ""
+    basketItemsArray.forEach(element => {
+        basketContainer.innerHTML += `
+            <tr>
+                <td>${element.name}</td>
+                <td>${1}</td>
+                <td>${element.price}</td>
+            </tr>
+        
+        `
+    });
+    calculTotal()
+}
+
+function calculTotal() {
+    console.log(basketItemsArray);
+    let total = 0
+    basketItemsArray.forEach(element => {
+        total += element.price
+        totalBasket.innerHTML = total
+    });
+}
+
+
 //Affiche les livres par catégorie
 function displayCategory() {
     itemsContainer.innerHTML = ""
@@ -30,13 +77,15 @@ function displayCategory() {
                     <p> ID : ${element.id}</p>
                     <p> Prix : ${element.price}</p>
                     <p> Quantité : ${element.quantity}</p>
-                    <a href="#" class="btn btn-primary">Mettre dans le panier</a>
+                    <a id="${element.id}" href="#" class="btn btn-primary addBasketButtons">Mettre dans le panier</a>
                 </div>
             </article>
             `
         }
     });
+    addBasket()
 }
+
 //Affiche tous les livres
 function displayAll() {
     itemsContainer.innerHTML = ""
@@ -51,10 +100,11 @@ function displayAll() {
                     <p> ID : ${element.id}</p>
                     <p> Prix : ${element.price}</p>
                     <p> Quantité : ${element.quantity}</p>
-                    <a href="#" class="btn btn-primary">Mettre dans le panier</a>
+                    <a id="${element.id}" href="#" class="btn btn-primary addBasketButtons">Mettre dans le panier</a>
                 </div>
             </article>
             `
     });
+    addBasket()
 }
 
