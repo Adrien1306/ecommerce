@@ -1,13 +1,16 @@
 //On cible le container où seront affichés tous les items
 const itemsContainer = document.querySelector("#items")
-//Initialisation de la page avec tous les articles
-displayAll()
+
 //On cible le container où seront affichés les éléments du panier
 const basketContainer = document.querySelector("#basket")
 //On cible les balises du total du panier
 const totalBasket = document.querySelector("#totalBasket")
 //Tableau avec le contenu du panier
 let basketItemsArray = []
+let localStorageInObject =[]
+//Initialisation de la page avec tous les articles
+displayAll()
+displayInBasketContainer()
 //On cible les liens 
 const jeunesseButton = document.querySelector("#jeunesse")
 const bdButton = document.querySelector("#bd")
@@ -33,13 +36,14 @@ function addBasket() {
 
 function putItemInBasketItemsArray() {
     basketItemsArray.push(livres[this.id])
-    console.log(basketItemsArray);
+    localStorage.setItem('basketItemsArray', JSON.stringify(basketItemsArray));
     displayInBasketContainer()
 }
 
 function displayInBasketContainer() {
+    localStorageInObject = JSON.parse(localStorage.getItem("basketItemsArray"))
     basketContainer.innerHTML = ""
-    basketItemsArray.forEach(element => {
+    localStorageInObject.forEach(element => {
         basketContainer.innerHTML += `
             <tr>
                 <td>${element.name}</td>
@@ -53,9 +57,8 @@ function displayInBasketContainer() {
 }
 
 function calculTotal() {
-    console.log(basketItemsArray);
     let total = 0
-    basketItemsArray.forEach(element => {
+    localStorageInObject.forEach(element => {
         total += element.price
         totalBasket.innerHTML = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(total)
     });
